@@ -1,0 +1,13 @@
+.divider {
+  background-color: #adc5a2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #fff;
+}

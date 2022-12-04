@@ -7,9 +7,8 @@ const Layout = () => {
     <>
       <Header />
       <main className="main">
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <Outlet />
-        </div>
+        <Outlet />
+        {/* <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}></div> */}
       </main>
     </>
   );
