@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Image, Space } from 'antd';
+import { Space } from 'antd';
 import { NavLink } from 'react-router-dom';
 
 import styles from './Header.module.css';
@@ -16,7 +16,7 @@ const Header = () => {
     <>
       <header className={styles.header}>
         <NavLink end to="/">
-          <Image src="/assets/isons/logo.svg" />
+          <img src="/assets/isons/logo.svg" />
         </NavLink>
 
         <Space size="middle">
