@@ -36,10 +36,10 @@ const Header = () => {
             Sign Up
           </Button> */}
 
-          <NavLink end to="/signIn" style={chooseLinkStyle}>
+          <NavLink end to="/sign-in" style={chooseLinkStyle}>
             Sign In
           </NavLink>
-          <NavLink end to="/signUp" style={chooseLinkStyle}>
+          <NavLink end to="/sign-up" style={chooseLinkStyle}>
             Sign Up
           </NavLink>
         </Space>
