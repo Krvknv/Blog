@@ -24,7 +24,16 @@ const initialStateUser: TInitialStateUser = {
 const sliceUser = createSlice({
   name: 'user',
   initialState: initialStateUser,
-  reducers: {},
+  reducers: {
+    setUserData(state, action) {
+      const { token, username, email, bio, image } = action.payload;
+      state.token = token;
+      state.username = username;
+      state.email = email;
+      state.bio = bio;
+      state.image = image;
+    },
+  },
   extraReducers: {
     [registerUser.fulfilled.type]: (
       state,
@@ -71,4 +80,4 @@ const sliceUser = createSlice({
 });
 
 export default sliceUser.reducer;
-// export const {  } = sliceUser.actions;
+export const { setUserData } = sliceUser.actions;
