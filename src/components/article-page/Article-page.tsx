@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Typography } from 'antd';
 import { Button, Form, Input } from 'antd';
@@ -9,8 +9,11 @@ const { TextArea } = Input;
 import styles from './article-page.module.css';
 import { createArticle } from 'API/articlesApi';
 import { useAppSelector } from 'features/redux';
+import { useNavigate } from 'react-router-dom';
 
 const ArticlePage = () => {
+  const navigate = useNavigate();
+
   const { token } = useAppSelector((state) => state.userSlice);
 
   const [form] = Form.useForm();
@@ -37,6 +40,10 @@ const ArticlePage = () => {
       setIsUniq(true);
     }
   };
+
+  useEffect(() => {
+    if (!token) navigate('/');
+  });
 
   return (
     <>
