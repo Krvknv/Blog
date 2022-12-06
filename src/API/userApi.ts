@@ -36,7 +36,6 @@ export const enterUser = createAsyncThunk(
         body: JSON.stringify({ user: { email, password } }),
       });
       const responseJson = await response.json();
-      console.log(responseJson.user);
       return { ...responseJson.user };
     } catch (error) {
       return thunkAPI.rejectWithValue('Error');
