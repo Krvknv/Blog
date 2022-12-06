@@ -6,7 +6,7 @@ import { Button, Form, Input } from 'antd';
 import styles from './sign-page.module.css';
 import { useAppDispatch, useAppSelector } from 'features/redux';
 import { enterUser, registerUser } from 'API/userApi';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
@@ -75,6 +75,22 @@ const SignPage = () => {
           <Form.Item>
             <Text type="danger">Incorrect values</Text>
           </Form.Item>
+        )}
+
+        {pathname === '/sign-in' ? (
+          <Text className={styles.subtitle}>
+            Don not have an account yet?
+            <NavLink end to="/sign-up" style={{ color: '#ABB1A4' }}>
+              Sign Up
+            </NavLink>
+          </Text>
+        ) : (
+          <Text className={styles.subtitle}>
+            Already have an account?
+            <NavLink end to="/sign-in" style={{ color: '#ABB1A4' }}>
+              Sign In
+            </NavLink>
+          </Text>
         )}
 
         <Form.Item wrapperCol={{ offset: 10 }}>
