@@ -28,7 +28,7 @@ const Header = () => {
     <>
       <header className={styles.header}>
         <NavLink end to="/">
-          <img src="/assets/isons/logo.svg" />
+          <img src="/assets/icons/logo.svg" />
         </NavLink>
 
         <Space size="large">
@@ -38,6 +38,10 @@ const Header = () => {
 
           {token ? (
             <>
+              <NavLink end to="/new-article" style={chooseLinkStyle}>
+                New article
+              </NavLink>
+
               <NavLink end to="/profile" style={chooseLinkStyle} className={styles.profile}>
                 <img src={image} className={styles.image} />
                 {username}

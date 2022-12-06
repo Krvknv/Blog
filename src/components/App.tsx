@@ -7,7 +7,7 @@ import Divider from './divider/Divider';
 import FormPage from './sign-page/Sign-page';
 import { store } from 'features/store';
 import { Provider } from 'react-redux';
-import ArticlePage from './Article-page';
+import ArticlePage from './article-page/Article-page';
 
 const App = () => {
   return (
