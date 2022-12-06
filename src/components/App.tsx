@@ -4,9 +4,10 @@ import Layout from './Layout';
 
 import '../global.css';
 import Divider from './divider/Divider';
-import FormPage from './form-page/Form-page';
+import FormPage from './sign-page/Sign-page';
 import { store } from 'features/store';
 import { Provider } from 'react-redux';
+import ArticlePage from './Article-page';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route index element={<Divider />}></Route>
           <Route path="/sign-in" element={<FormPage />}></Route>
           <Route path="/sign-up" element={<FormPage />}></Route>
+          <Route path="/new-article" element={<ArticlePage />}></Route>
         </Route>
       </Routes>
     </Provider>
