@@ -3,14 +3,14 @@ import React from 'react';
 import { Typography } from 'antd';
 import { Button, Form, Input } from 'antd';
 
-import styles from './form-page.module.css';
+import styles from './sign-page.module.css';
 import { useAppDispatch, useAppSelector } from 'features/redux';
 import { enterUser, registerUser } from 'API/userApi';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
-const FormPage = () => {
+const SignPage = () => {
   const dispatch = useAppDispatch();
 
   const { isExist, incorrectValue } = useAppSelector((state) => state.userSlice);
@@ -103,4 +103,4 @@ const FormPage = () => {
   );
 };
 
-export default FormPage;
+export default SignPage;
