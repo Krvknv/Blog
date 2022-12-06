@@ -16,8 +16,8 @@ export const registerUser = createAsyncThunk(
       if (!response.ok) {
         throw Error;
       }
-      const responseJson = await response.json();
-      return { ...responseJson.user };
+      const { user } = await response.json();
+      return { ...user };
     } catch (error) {
       return thunkAPI.rejectWithValue('Error');
     }

@@ -15,7 +15,7 @@ const FormPage = () => {
 
   const { isExist, incorrectValue } = useAppSelector((state) => state.userSlice);
 
-  const location = useLocation().pathname;
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const [form] = Form.useForm();
@@ -36,11 +36,11 @@ const FormPage = () => {
   return (
     <>
       <Title level={2} style={{ marginBottom: '40px' }} className={styles.title}>
-        {location === '/sign-in' ? 'Welcome' : 'Join us'}
+        {pathname === '/sign-in' ? 'Welcome' : 'Join us'}
       </Title>
 
       <Form form={form} layout="vertical" name="basic" autoComplete="off" className={styles.form}>
-        {location === '/sign-up' && (
+        {pathname === '/sign-up' && (
           <Form.Item
             label="Username"
             name="username"
@@ -78,7 +78,7 @@ const FormPage = () => {
         )}
 
         <Form.Item wrapperCol={{ offset: 10 }}>
-          {location === '/sign-in' ? (
+          {pathname === '/sign-in' ? (
             <Button
               type="primary"
               htmlType="submit"
