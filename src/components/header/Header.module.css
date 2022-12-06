@@ -6,3 +6,15 @@
   align-items: center;
   margin: 0 auto;
 }
+
+.image {
+  width: 30px;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

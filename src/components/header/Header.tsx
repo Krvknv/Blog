@@ -15,7 +15,7 @@ const chooseLinkStyle = ({ isActive }: { isActive: boolean }) => {
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const { token } = useAppSelector((state) => state.userSlice);
+  const { token, image, username } = useAppSelector((state) => state.userSlice);
 
   const navigate = useNavigate();
 
@@ -31,20 +31,30 @@ const Header = () => {
           <img src="/assets/isons/logo.svg" />
         </NavLink>
 
-        <Space size="middle">
+        <Space size="large">
           <NavLink end to="/" style={chooseLinkStyle}>
             Home
           </NavLink>
 
           {token ? (
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{ backgroundColor: '#ADC5A2' }}
-              onClick={handleExit}
-            >
-              Sign out
-            </Button>
+            <>
+              <NavLink end to="/profile" style={chooseLinkStyle} className={styles.profile}>
+                <img src={image} className={styles.image} />
+                {username}
+              </NavLink>
+              <NavLink end to="/settings" style={chooseLinkStyle}>
+                Settings
+              </NavLink>
+
+              <Button
+                type="primary"
+                shape="round"
+                style={{ backgroundColor: '#ADC5A2' }}
+                onClick={handleExit}
+              >
+                Sign out
+              </Button>
+            </>
           ) : (
             <>
               <NavLink end to="/sign-in" style={chooseLinkStyle}>
