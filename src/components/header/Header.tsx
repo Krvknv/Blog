@@ -53,6 +53,7 @@ const Header = () => {
               <Button
                 type="primary"
                 shape="round"
+                size="large"
                 style={{ backgroundColor: '#ADC5A2' }}
                 onClick={handleExit}
               >

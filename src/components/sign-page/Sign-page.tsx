@@ -96,6 +96,8 @@ const SignPage = () => {
         <Form.Item wrapperCol={{ offset: 10 }}>
           {pathname === '/sign-in' ? (
             <Button
+              shape="round"
+              size="large"
               type="primary"
               htmlType="submit"
               style={{ backgroundColor: '#ADC5A2' }}
@@ -105,6 +107,8 @@ const SignPage = () => {
             </Button>
           ) : (
             <Button
+              shape="round"
+              size="large"
               type="primary"
               htmlType="submit"
               style={{ backgroundColor: '#ADC5A2' }}

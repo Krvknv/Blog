@@ -95,6 +95,8 @@ const ArticlePage = () => {
         <Form.Item wrapperCol={{ offset: 10 }}>
           <Button
             type="primary"
+            shape="round"
+            size="large"
             htmlType="submit"
             style={{ backgroundColor: '#ADC5A2' }}
             onClick={handleCreate}
