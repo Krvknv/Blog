@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { enterUser, registerUser } from 'API/userApi';
+import { editUser, enterUser, registerUser } from 'API/userApi';
+import { TFullUserData } from 'types/types';
 
 export type TInitialStateUser = {
   email: string;
@@ -35,46 +36,43 @@ const sliceUser = createSlice({
     },
   },
   extraReducers: {
-    [registerUser.fulfilled.type]: (
-      state,
-      action: PayloadAction<{
-        email: string;
-        token: string;
-        username: string;
-        bio: string;
-        image: string;
-      }>
-    ) => {
+    [registerUser.fulfilled.type]: (state, action: PayloadAction<TFullUserData>) => {
       const { token, username, email, bio, image } = action.payload;
       state.token = token;
       state.username = username;
       state.email = email;
       state.bio = bio;
       state.image = image;
+      state.isExist = false;
     },
-    [registerUser.rejected.type]: (state, action: PayloadAction<string>) => {
+    [registerUser.rejected.type]: (state) => {
       state.isExist = true;
     },
 
-    [enterUser.fulfilled.type]: (
-      state,
-      action: PayloadAction<{
-        email: string;
-        token: string;
-        username: string;
-        bio: string;
-        image: string;
-      }>
-    ) => {
+    [enterUser.fulfilled.type]: (state, action: PayloadAction<TFullUserData>) => {
       const { token, username, email, bio, image } = action.payload;
       state.token = token;
       state.username = username;
       state.email = email;
       state.bio = bio;
       state.image = image;
+      state.incorrectValue = false;
     },
-    [enterUser.rejected.type]: (state, action: PayloadAction<string>) => {
+    [enterUser.rejected.type]: (state) => {
       state.incorrectValue = true;
+    },
+
+    [editUser.fulfilled.type]: (state, action: PayloadAction<TFullUserData>) => {
+      const { token, username, email, bio, image } = action.payload;
+      state.token = token;
+      state.username = username;
+      state.email = email;
+      state.bio = bio;
+      state.image = image;
+      state.isExist = false;
+    },
+    [editUser.rejected.type]: (state) => {
+      state.isExist = true;
     },
   },
 });
