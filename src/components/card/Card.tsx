@@ -60,7 +60,7 @@ const Card = (props: { article: TArcticle }) => {
           <div className={styles.tags}>
             {article.tagList.map((item, index) => (
               <Tag key={index} color="lime">
-                magenta
+                {item}
               </Tag>
             ))}
           </div>
