@@ -80,14 +80,14 @@ const SignPage = () => {
         {pathname === '/sign-in' ? (
           <Text className={styles.subtitle}>
             Don not have an account yet?
-            <NavLink end to="/sign-up" style={{ color: '#ABB1A4' }}>
+            <NavLink to="/sign-up" style={{ color: '#ABB1A4' }}>
               Sign Up
             </NavLink>
           </Text>
         ) : (
           <Text className={styles.subtitle}>
             Already have an account?
-            <NavLink end to="/sign-in" style={{ color: '#ABB1A4' }}>
+            <NavLink to="/sign-in" style={{ color: '#ABB1A4' }}>
               Sign In
             </NavLink>
           </Text>

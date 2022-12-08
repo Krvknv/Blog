@@ -1,0 +1,47 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #abb1a4;
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+}
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #abb1a4;
+}
+
+.avatar {
+  width: 40px;
+  border-radius: 100%;
+}
+
+.likeBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.likeBtn:hover {
+  border: 2px solid #adc5a2 !important;
+  color: #adc5a2 !important;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  text-decoration: none;
+}

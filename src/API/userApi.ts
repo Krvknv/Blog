@@ -55,16 +55,13 @@ export const editUser = createAsyncThunk(
         },
         body: JSON.stringify({ user: userData }),
       });
-      console.log(response, 'response');
 
       if (!response.ok) {
-        console.log('if');
         throw Error;
       }
       const { user } = await response.json();
       return { ...user };
     } catch (error) {
-      console.log('error');
       return thunkAPI.rejectWithValue('Error');
     }
   }

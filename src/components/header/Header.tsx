@@ -38,15 +38,15 @@ const Header = () => {
 
           {token ? (
             <>
-              <NavLink end to="/new-article" style={chooseLinkStyle}>
+              <NavLink to="/new-article" style={chooseLinkStyle}>
                 New article
               </NavLink>
 
-              <NavLink end to="/profile" style={chooseLinkStyle} className={styles.profile}>
+              <NavLink to="/profile" style={chooseLinkStyle} className={styles.profile}>
                 <img src={image} className={styles.image} />
                 {username}
               </NavLink>
-              <NavLink end to="/settings" style={chooseLinkStyle}>
+              <NavLink to="/settings" style={chooseLinkStyle}>
                 Settings
               </NavLink>
 
@@ -62,10 +62,10 @@ const Header = () => {
             </>
           ) : (
             <>
-              <NavLink end to="/sign-in" style={chooseLinkStyle}>
+              <NavLink to="/sign-in" style={chooseLinkStyle}>
                 Sign In
               </NavLink>
-              <NavLink end to="/sign-up" style={chooseLinkStyle}>
+              <NavLink to="/sign-up" style={chooseLinkStyle}>
                 Sign Up
               </NavLink>
             </>
