@@ -1,4 +1,4 @@
-import { CREATE_ARTICLE_URL, GET_GLOBAL_ARTICLE_URL } from 'features/constants';
+import { CREATE_ARTICLE_URL, GET_GLOBAL_ARTICLE_URL, GET_TAGS_URL } from 'features/constants';
 import { modifyParams } from 'features/helpers/modify-params';
 import { TArticleData } from 'types/types';
 
@@ -22,7 +22,15 @@ export const getGlobalArticles = async (params: { [index: string]: string | numb
 
   const response = await fetch(`${GET_GLOBAL_ARTICLE_URL}?${paramsString}`);
 
-  const { articles } = await response.json();
+  const responseJson = await response.json();
 
-  return articles;
+  return responseJson;
+};
+
+export const getTags = async () => {
+  const response = await fetch(GET_TAGS_URL);
+
+  const { tags } = await response.json();
+
+  return tags;
 };
