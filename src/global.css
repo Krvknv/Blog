@@ -3,3 +3,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.ant-pagination-item-active {
+  border: none !important;
+  background-color: #adc5a2 !important;
+}
+.ant-pagination-item-active > a {
+  color: #fff !important;
+}
+
+.anticon {
+  color: #000 !important;
+}

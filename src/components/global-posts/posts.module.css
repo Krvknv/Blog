@@ -4,4 +4,12 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
 }
