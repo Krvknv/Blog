@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 import Divider from 'components/divider/Divider';
 
-import styles from './posts.module.css';
-// import '../../global.css';
+import { Tabs, Typography } from 'antd';
+const { Text, Title } = Typography;
 
-import { getGlobalArticles } from 'API/articlesApi';
+import styles from './posts.module.css';
+
+import { getGlobalArticles, getGlobalArticlesSignIn, getLocalArticle } from 'API/articlesApi';
 import { TArcticleArgs } from 'types/types';
 import Card from 'components/card/Card';
 import TagsList from 'components/tags-list/Tags-list';
@@ -18,6 +20,9 @@ const GlobalPosts = () => {
   const [articlesQuantity, setArticlesQuantity] = useState(0);
   const [current, setCurrent] = useState(1);
   const [offset, setOffset] = useState(0);
+  const [tabsValue, setTabsValue] = useState('local');
+
+  const [isLiked, setIsLiked] = useState(false);
 
   const onChangePage: PaginationProps['onChange'] = (page) => {
     const offsetNum = (page - 1) * 10;
@@ -28,7 +33,14 @@ const GlobalPosts = () => {
 
   const dispatch = useAppDispatch();
 
-  const { pagesQuantity } = useAppSelector((state) => state.articleSlice);
+  // const { pagesQuantity } = useAppSelector((state) => state.articleSlice);
+  const { token } = useAppSelector((state) => state.userSlice);
+
+  const handleChangeTab = (key: string) => {
+    setCurrent(1);
+    setTabsValue(key);
+    setOffset(0);
+  };
 
   useEffect(() => {
     const request = async () => {
@@ -39,7 +51,19 @@ const GlobalPosts = () => {
         limit: 10,
         offset: offset,
       };
-      const { articles, articlesCount } = await getGlobalArticles(params);
+
+      let articles;
+      let articlesCount;
+
+      if (token) {
+        if (tabsValue === 'local') {
+          ({ articles, articlesCount } = await getLocalArticle(token, offset));
+        } else {
+          ({ articles, articlesCount } = await getGlobalArticlesSignIn(params, token));
+        }
+      } else {
+        ({ articles, articlesCount } = await getGlobalArticles(params));
+      }
 
       const pages = Math.ceil(articlesCount / 10);
 
@@ -49,17 +73,50 @@ const GlobalPosts = () => {
     };
 
     request();
-  }, [dispatch, offset]);
+  }, [dispatch, offset, token, isLiked, tabsValue]);
 
   return (
     <>
-      <Divider />
+      <Divider>
+        <Title style={{ color: '#fff' }}>BLOG</Title>
+        <Text style={{ fontSize: '16px', color: '#fff' }}>A place to share your knowledge</Text>
+      </Divider>
+
       <div className={styles.cards}>
         <TagsList />
 
-        {cardsList.map((item, index) => (
-          <Card article={item} key={index} />
-        ))}
+        {token ? (
+          <Tabs
+            defaultActiveKey="local"
+            style={{ width: '1200px' }}
+            onChange={handleChangeTab}
+            items={[
+              {
+                label: `Global feed`,
+                key: 'global',
+                children: cardsList.map((item, index) => (
+                  <Card article={item} key={index} isLiked={isLiked} setIsLiked={setIsLiked} />
+                )),
+              },
+              {
+                label: `Your feed`,
+                key: 'local',
+                children:
+                  cardsList.length > 0 ? (
+                    cardsList.map((item, index) => (
+                      <Card article={item} key={index} isLiked={isLiked} setIsLiked={setIsLiked} />
+                    ))
+                  ) : (
+                    <p>There are not posts</p>
+                  ),
+              },
+            ]}
+          />
+        ) : (
+          cardsList.map((item, index) => (
+            <Card article={item} key={index} isLiked={isLiked} setIsLiked={setIsLiked} />
+          ))
+        )}
       </div>
 
       <Pagination

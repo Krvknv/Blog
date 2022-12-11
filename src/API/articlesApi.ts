@@ -1,4 +1,9 @@
-import { CREATE_ARTICLE_URL, GET_GLOBAL_ARTICLE_URL, GET_TAGS_URL } from 'features/constants';
+import {
+  CREATE_ARTICLE_URL,
+  GET_GLOBAL_ARTICLE_URL,
+  GET_TAGS_URL,
+  GET_YOUR_FEED_URL,
+} from 'features/constants';
 import { modifyParams } from 'features/helpers/modify-params';
 import { TArticleData } from 'types/types';
 
@@ -27,10 +32,71 @@ export const getGlobalArticles = async (params: { [index: string]: string | numb
   return responseJson;
 };
 
+export const getGlobalArticlesSignIn = async (
+  params: { [index: string]: string | number },
+  token: string
+) => {
+  const paramsString = modifyParams(params);
+
+  const response = await fetch(`${GET_GLOBAL_ARTICLE_URL}?${paramsString}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const responseJson = await response.json();
+
+  return responseJson;
+};
+
 export const getTags = async () => {
   const response = await fetch(GET_TAGS_URL);
 
   const { tags } = await response.json();
 
   return tags;
+};
+
+export const favoriteArticle = async (slug: string, token: string) => {
+  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}/favorite`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const responseJson = response.json();
+
+  return responseJson;
+};
+
+export const unfavoriteArticle = async (slug: string, token: string) => {
+  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}/favorite`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const responseJson = response.json();
+
+  return responseJson;
+};
+
+export const getLocalArticle = async (token: string, offset: number) => {
+  const response = await fetch(`${GET_YOUR_FEED_URL}?limit=20&offset=${offset}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const responseJson = response.json();
+
+  return responseJson;
 };
