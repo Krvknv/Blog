@@ -12,6 +12,32 @@
   color: #fff !important;
 }
 
-.anticon {
+.anticon,
+.ant-tabs-tab-active {
   color: #000 !important;
 }
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #adc5a2 !important ;
+}
+
+.ant-tabs-ink-bar {
+  background: #adc5a2 !important;
+}
+
+.ant-tabs .ant-tabs-tab:hover {
+  color: #000;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.ant-tabs-tabpane-active {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+

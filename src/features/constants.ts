@@ -4,5 +4,6 @@ export const EDIT_USER_URL = 'https://api.realworld.io/api/user';
 
 export const CREATE_ARTICLE_URL = 'https://api.realworld.io/api/articles';
 export const GET_GLOBAL_ARTICLE_URL = 'https://api.realworld.io/api/articles';
+export const GET_YOUR_FEED_URL = 'https://api.realworld.io/api/articles/feed';
 
 export const GET_TAGS_URL = 'https://api.realworld.io/api/tags';
