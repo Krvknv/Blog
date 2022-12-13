@@ -3,13 +3,12 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   align-items: center;
-  margin-bottom: 50px;
 }
 
-.pagination {
+/* .pagination {
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
-}
+} */

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { EDIT_USER_URL, ENTER_USER_URL, REGISTER_USER_URL } from 'features/constants';
+import { EDIT_USER_URL, ENTER_USER_URL, GET_PROFILE, REGISTER_USER_URL } from 'features/constants';
 import { TFullUserData, TUserData } from 'types/types';
 
 export const registerUser = createAsyncThunk(
@@ -66,3 +66,48 @@ export const editUser = createAsyncThunk(
     }
   }
 );
+
+export const getProfile = async (username: string, token: string) => {
+  const options = token
+    ? {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    : {};
+
+  const response = await fetch(`${GET_PROFILE}${username}`, options);
+  const { profile } = await response.json();
+
+  return profile;
+};
+
+export const followUser = async (username: string, token: string) => {
+  const response = await fetch(`${GET_PROFILE}${username}/follow`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const { profile } = await response.json();
+
+  return profile;
+};
+
+export const unfollowUser = async (username: string, token: string) => {
+  const response = await fetch(`${GET_PROFILE}${username}/follow`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const { profile } = await response.json();
+
+  return profile;
+};
