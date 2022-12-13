@@ -5,7 +5,7 @@ import Divider from 'components/divider/Divider';
 import { Tabs, Typography } from 'antd';
 const { Text, Title } = Typography;
 
-import styles from './posts.module.css';
+import styles from './main-page.module.css';
 
 import { getGlobalArticles, getGlobalArticlesSignIn, getLocalArticle } from 'API/articlesApi';
 import { TArcticle, TArcticleArgs } from 'types/types';
@@ -15,7 +15,7 @@ import { useAppDispatch, useAppSelector } from 'features/redux';
 import { setPagesQuantity } from 'features/slices/article-slice';
 import { Pagination, PaginationProps } from 'antd';
 
-const GlobalPosts = () => {
+const MainPage = () => {
   const [cardsList, setCardsList] = useState([]);
   const [articlesQuantity, setArticlesQuantity] = useState(0);
   const [current, setCurrent] = useState(1);
@@ -125,4 +125,4 @@ const GlobalPosts = () => {
   );
 };
 
-export default GlobalPosts;
+export default MainPage;
