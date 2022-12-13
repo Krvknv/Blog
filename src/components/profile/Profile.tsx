@@ -7,7 +7,7 @@ import { Button, Pagination, PaginationProps, Tabs, Typography } from 'antd';
 const { Title } = Typography;
 
 import styles from './profile.module.css';
-import Divider from 'components/divider/Divider';
+import ColorBox from 'components/color-box/Color-box';
 import { TArcticle, TArcticleArgs } from 'types/types';
 import { getGlobalArticles, getGlobalArticlesSignIn } from 'API/articlesApi';
 import Card from 'components/card/Card';
@@ -95,7 +95,7 @@ const Profile = () => {
 
   return (
     <>
-      <Divider>
+      <ColorBox>
         <img className={styles.avatar} src={avatar} alt="" />
         <Title style={{ color: '#fff' }} level={2}>
           {id}
@@ -109,7 +109,7 @@ const Profile = () => {
             isFollowed ? 'Unfollow' : 'Follow'
           } ${id}`}</Button>
         )}
-      </Divider>
+      </ColorBox>
 
       <div className="container">
         <Tabs

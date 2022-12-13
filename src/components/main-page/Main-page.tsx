@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import Divider from 'components/divider/Divider';
+import ColorBox from 'components/color-box/Color-box';
 
 import { Tabs, Typography } from 'antd';
 const { Text, Title } = Typography;
@@ -75,10 +75,10 @@ const MainPage = () => {
 
   return (
     <>
-      <Divider>
+      <ColorBox>
         <Title style={{ color: '#fff' }}>BLOG</Title>
         <Text style={{ fontSize: '16px', color: '#fff' }}>A place to share your knowledge</Text>
-      </Divider>
+      </ColorBox>
 
       <div className={styles.cards}>
         <TagsList />
