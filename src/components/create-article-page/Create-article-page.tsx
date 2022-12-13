@@ -24,8 +24,12 @@ const CreateArticlePage = () => {
   const tags = Form.useWatch('tags', form);
 
   const [isUniq, setIsUniq] = useState(false);
+  const [isCreated, setIsCreated] = useState(false);
 
   const handleCreate = async () => {
+    setIsCreated(false);
+    setIsUniq(false);
+
     const tagsArr = tags.split(',');
 
     const articleData = {
@@ -36,6 +40,12 @@ const CreateArticlePage = () => {
     };
 
     const response = await createArticle(articleData, token);
+    form.resetFields();
+
+    if ('article' in response) {
+      setIsCreated(true);
+    }
+
     if (response.errors.title.includes('must be unique')) {
       setIsUniq(true);
     }
@@ -89,6 +99,12 @@ const CreateArticlePage = () => {
         {isUniq && (
           <Form.Item>
             <Text type="danger">The article already exists</Text>
+          </Form.Item>
+        )}
+
+        {isCreated && (
+          <Form.Item>
+            <Text>The article is created</Text>
           </Form.Item>
         )}
 
