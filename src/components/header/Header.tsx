@@ -42,7 +42,11 @@ const Header = () => {
                 New article
               </NavLink>
 
-              <NavLink to="/profile" style={chooseLinkStyle} className={styles.profile}>
+              <NavLink
+                to={`/profile/${username}`}
+                style={chooseLinkStyle}
+                className={styles.profile}
+              >
                 <img src={image} className={styles.image} />
                 {username}
               </NavLink>
