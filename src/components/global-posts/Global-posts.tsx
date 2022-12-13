@@ -8,7 +8,7 @@ const { Text, Title } = Typography;
 import styles from './posts.module.css';
 
 import { getGlobalArticles, getGlobalArticlesSignIn, getLocalArticle } from 'API/articlesApi';
-import { TArcticleArgs } from 'types/types';
+import { TArcticle, TArcticleArgs } from 'types/types';
 import Card from 'components/card/Card';
 import TagsList from 'components/tags-list/Tags-list';
 import { useAppDispatch, useAppSelector } from 'features/redux';
@@ -21,8 +21,6 @@ const GlobalPosts = () => {
   const [current, setCurrent] = useState(1);
   const [offset, setOffset] = useState(0);
   const [tabsValue, setTabsValue] = useState('local');
-
-  const [isLiked, setIsLiked] = useState(false);
 
   const onChangePage: PaginationProps['onChange'] = (page) => {
     const offsetNum = (page - 1) * 10;
@@ -73,7 +71,7 @@ const GlobalPosts = () => {
     };
 
     request();
-  }, [dispatch, offset, token, isLiked, tabsValue]);
+  }, [dispatch, offset, tabsValue, token]);
 
   return (
     <>
@@ -88,14 +86,14 @@ const GlobalPosts = () => {
         {token ? (
           <Tabs
             defaultActiveKey="local"
-            style={{ width: '1200px' }}
+            style={{ width: '1200px', marginBottom: '50px' }}
             onChange={handleChangeTab}
             items={[
               {
                 label: `Global feed`,
                 key: 'global',
-                children: cardsList.map((item, index) => (
-                  <Card article={item} key={index} isLiked={isLiked} setIsLiked={setIsLiked} />
+                children: cardsList.map((item: TArcticle) => (
+                  <Card articleData={item} key={item.slug} />
                 )),
               },
               {
@@ -103,9 +101,7 @@ const GlobalPosts = () => {
                 key: 'local',
                 children:
                   cardsList.length > 0 ? (
-                    cardsList.map((item, index) => (
-                      <Card article={item} key={index} isLiked={isLiked} setIsLiked={setIsLiked} />
-                    ))
+                    cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
                   ) : (
                     <p>There are not posts</p>
                   ),
@@ -113,16 +109,14 @@ const GlobalPosts = () => {
             ]}
           />
         ) : (
-          cardsList.map((item, index) => (
-            <Card article={item} key={index} isLiked={isLiked} setIsLiked={setIsLiked} />
-          ))
+          cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
         )}
       </div>
 
       <Pagination
         current={current}
         onChange={onChangePage}
-        className={styles.pagination}
+        className="pagination"
         defaultCurrent={1}
         total={articlesQuantity}
         showSizeChanger={false}
