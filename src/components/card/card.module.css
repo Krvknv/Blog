@@ -38,6 +38,22 @@
   color: #adc5a2 !important;
 }
 
+.likeBtn-arctive {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #adc5a2;
+  color: #fff;
+}
+
+.likeBtn-arctive:hover {
+  border: 2px solid #adc5a2 !important;
+  color: #ffffff !important;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;

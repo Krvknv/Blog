@@ -91,7 +91,7 @@ const Profile = () => {
     request();
   }, [id, navigate, offset, tabsValue, token, username]);
 
-  const Cards = cardsList.map((item: TArcticle) => <Card article={item} key={item.slug} />);
+  const Cards = cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />);
 
   return (
     <>
