@@ -7,13 +7,7 @@ const { Text, Title } = Typography;
 
 const Divider = (props: { children: ReactNode }) => {
   const { children } = props;
-  return (
-    <div className={styles.divider}>
-      {/* <Title style={{ color: '#fff' }}>BLOG</Title>
-      <Text className={styles.subtitle}>A place to share your knowledge</Text> */}
-      {children}
-    </div>
-  );
+  return <div className={styles.divider}>{children}</div>;
 };
 
 export default Divider;
