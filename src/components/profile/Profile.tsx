@@ -24,6 +24,7 @@ const Profile = () => {
   const [tabsValue, setTabsValue] = useState('myArticle');
   const [avatar, setAvatar] = useState('');
   const [isFollowed, setIsFollowed] = useState();
+  const [isSend, setIsSend] = useState<string>();
 
   const { token, username } = useAppSelector((state) => state.userSlice);
 
@@ -89,9 +90,11 @@ const Profile = () => {
     };
 
     request();
-  }, [id, navigate, offset, tabsValue, token, username]);
+  }, [id, navigate, offset, tabsValue, token, username, isSend]);
 
-  const Cards = cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />);
+  const Cards = cardsList.map((item: TArcticle) => (
+    <Card articleData={item} key={item.slug} setIsSend={setIsSend} />
+  ));
 
   return (
     <>

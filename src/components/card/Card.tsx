@@ -13,8 +13,8 @@ import { favoriteArticle, unfavoriteArticle } from 'API/articlesApi';
 
 const { Title, Text } = Typography;
 
-const Card = (props: { articleData: TArcticle }) => {
-  const { articleData } = props;
+const Card = (props: { articleData: TArcticle; setIsSend?: (value: string) => void }) => {
+  const { articleData, setIsSend } = props;
 
   const [isLiked, setIsLiked] = useState(articleData.favorited);
   const [likeNum, setLikeNum] = useState(articleData.favoritesCount);
@@ -31,6 +31,9 @@ const Card = (props: { articleData: TArcticle }) => {
 
       setIsLiked(article.favorited);
       setLikeNum(article.favoritesCount);
+      if (setIsSend) {
+        setIsSend(JSON.stringify(article));
+      }
     } else {
       const { article } = await favoriteArticle(articleData.slug, token);
       setIsLiked(article.favorited);
