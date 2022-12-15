@@ -100,3 +100,82 @@ export const getLocalArticle = async (token: string, offset: number) => {
 
   return responseJson;
 };
+
+export const getArticle = async (slug: string) => {
+  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}`);
+  const { article } = await response.json();
+
+  return article;
+};
+
+export const getComments = async (slug: string, token: string) => {
+  const options = token
+    ? {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    : {};
+  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}/comments`, options);
+  const { comments } = await response.json();
+
+  return comments;
+};
+
+export const postComment = async (slug: string, token: string, commentText: string) => {
+  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      comment: {
+        body: commentText,
+      },
+    }),
+  });
+  const { comment } = await response.json();
+
+  return comment;
+};
+
+export const deleteComment = async (slug: string, id: number, token: string) => {
+  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}/comments/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const { comment } = await response.json();
+
+  return comment;
+};
+
+export const deleteArticle = async (slug: string, token: string) => {
+  await fetch(`${CREATE_ARTICLE_URL}/${slug}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const editArticle = async (slug: string, articleData: TArticleData, token: string) => {
+  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ article: articleData }),
+  });
+
+  const responseJson = await response.json();
+
+  return responseJson;
+};

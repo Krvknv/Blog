@@ -12,7 +12,6 @@ import { TArcticle, TArcticleArgs } from 'types/types';
 import Card from 'components/card/Card';
 import TagsList from 'components/tags-list/Tags-list';
 import { useAppDispatch, useAppSelector } from 'features/redux';
-import { setPagesQuantity } from 'features/slices/article-slice';
 import { Pagination, PaginationProps } from 'antd';
 
 const MainPage = () => {
@@ -65,7 +64,6 @@ const MainPage = () => {
 
       const pages = Math.ceil(articlesCount / 10);
 
-      dispatch(setPagesQuantity({ pagesQuantity: pages }));
       setCardsList(articles);
       setArticlesQuantity(articlesCount);
     };

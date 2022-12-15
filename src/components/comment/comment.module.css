@@ -1,0 +1,48 @@
+.comment {
+  width: 600px;
+  border: 1px solid #dfdfdf;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.avatar {
+  width: 50px;
+  border-radius: 100%;
+  display: block;
+}
+
+.comment-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #dbdbdb;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.name,
+.date {
+  color: #fff;
+}
+.text {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.delete {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.delete:hover {
+  background-color: transparent !important;
+}

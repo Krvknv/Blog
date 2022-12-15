@@ -1,23 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export type TInitialStateUser = {
-  pagesQuantity: number | null;
+  name: string;
+  description: string;
+  body: string;
+  slug: string;
+  tagsList: string[];
 };
 
 const initialStateUser: TInitialStateUser = {
-  pagesQuantity: null,
+  name: '',
+  description: '',
+  body: '',
+  slug: '',
+  tagsList: [],
 };
 
 const sliceArticle = createSlice({
   name: 'article',
   initialState: initialStateUser,
   reducers: {
-    setPagesQuantity: (state, action) => {
-      const { pagesQuantity } = action.payload;
-      state.pagesQuantity = pagesQuantity;
+    setAticleInfo: (state, action) => {
+      const { name, description, body, slug, tagsList } = action.payload;
+      state.name = name;
+      state.description = description;
+      state.body = body;
+      state.slug = slug;
+      state.tagsList = tagsList;
     },
   },
 });
 
 export default sliceArticle.reducer;
-export const { setPagesQuantity } = sliceArticle.actions;
+export const { setAticleInfo } = sliceArticle.actions;

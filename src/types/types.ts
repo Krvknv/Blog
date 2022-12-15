@@ -3,6 +3,14 @@ export type TUserData = {
   username: string;
   password: string;
 };
+
+export type TAuthor = {
+  username: string;
+  bio: string;
+  image: string;
+  following: boolean;
+};
+
 export type TFullUserData = {
   email: string;
   username: string;
@@ -36,10 +44,13 @@ export type TArcticle = {
   updatedAt: string;
   favorited: boolean;
   favoritesCount: number;
-  author: {
-    username: string;
-    bio: string | null;
-    image: string;
-    following: boolean;
-  };
+  author: TAuthor;
+};
+
+export type TComment = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  body: string;
+  author: TAuthor;
 };

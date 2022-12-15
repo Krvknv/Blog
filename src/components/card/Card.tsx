@@ -59,7 +59,7 @@ const Card = (props: { articleData: TArcticle }) => {
           shape="round"
           icon={<Like color={isLiked ? '#ffffff' : '#ADC5A2'} />}
           size="small"
-          className={isLiked ? styles['likeBtn-arctive'] : styles.likeBtn}
+          className={isLiked ? 'button-like-arctive' : 'button-like'}
           onClick={handleLike}
         >
           {likeNum}
@@ -70,7 +70,7 @@ const Card = (props: { articleData: TArcticle }) => {
         className={styles.link}
         style={{ marginBottom: '10px' }}
       >
-        <Text>{articleData.slug.split('-').join(' ').slice(0, -7)}</Text>
+        <Text>{articleData.title}</Text>
       </NavLink>
 
       <NavLink

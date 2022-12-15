@@ -105,7 +105,7 @@ const Profile = () => {
             Edit profile
           </NavLink>
         ) : (
-          <Button className={styles.button} onClick={handleFollow}>{`${
+          <Button className="button-follow" onClick={handleFollow}>{`${
             isFollowed ? 'Unfollow' : 'Follow'
           } ${id}`}</Button>
         )}

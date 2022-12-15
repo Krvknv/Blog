@@ -34,8 +34,8 @@
 }
 
 .likeBtn:hover {
-  border: 2px solid #adc5a2 !important;
-  color: #adc5a2 !important;
+  border: 2px solid var(--color-primary) !important;
+  color: var(--color-primary) !important;
 }
 
 .likeBtn-arctive {
@@ -45,12 +45,12 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  background-color: #adc5a2;
+  background-color: var(--color-primary);
   color: #fff;
 }
 
 .likeBtn-arctive:hover {
-  border: 2px solid #adc5a2 !important;
+  border: 2px solid var(--color-primary) !important;
   color: #ffffff !important;
 }
 
