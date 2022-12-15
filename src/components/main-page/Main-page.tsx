@@ -107,7 +107,11 @@ const MainPage = () => {
             ]}
           />
         ) : (
-          cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
+          <div className={styles.cards}>
+            {cardsList.map((item: TArcticle) => (
+              <Card articleData={item} key={item.slug} />
+            ))}
+          </div>
         )}
       </div>
 

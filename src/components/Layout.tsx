@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import Footer from './footer/Footer';
 import Header from './header/Header';
 
 const Layout = () => {
@@ -10,6 +11,7 @@ const Layout = () => {
         <Outlet />
         {/* <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}></div> */}
       </main>
+      <Footer />
     </>
   );
 };
