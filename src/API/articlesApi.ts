@@ -1,14 +1,9 @@
-import {
-  CREATE_ARTICLE_URL,
-  GET_GLOBAL_ARTICLE_URL,
-  GET_TAGS_URL,
-  GET_YOUR_FEED_URL,
-} from 'features/constants';
+import { ARTICLES_URL, GET_TAGS_URL, GET_YOUR_FEED_URL } from 'features/constants';
 import { modifyParams } from 'features/helpers/modify-params';
 import { TArticleData } from 'types/types';
 
 export const createArticle = async (articleData: TArticleData, token: string) => {
-  const response = await fetch(CREATE_ARTICLE_URL, {
+  const response = await fetch(ARTICLES_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -36,7 +31,7 @@ export const getGlobalArticles = async (
       }
     : {};
   const paramsString = modifyParams(params);
-  const response = await fetch(`${GET_GLOBAL_ARTICLE_URL}?${paramsString}`, options);
+  const response = await fetch(`${ARTICLES_URL}?${paramsString}`, options);
 
   const responseJson = await response.json();
 
@@ -52,7 +47,7 @@ export const getTags = async () => {
 };
 
 export const favoriteArticle = async (slug: string, token: string) => {
-  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}/favorite`, {
+  const response = await fetch(`${ARTICLES_URL}/${slug}/favorite`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -66,7 +61,7 @@ export const favoriteArticle = async (slug: string, token: string) => {
 };
 
 export const unfavoriteArticle = async (slug: string, token: string) => {
-  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}/favorite`, {
+  const response = await fetch(`${ARTICLES_URL}/${slug}/favorite`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -94,7 +89,7 @@ export const getLocalArticle = async (token: string, offset: number) => {
 };
 
 export const getArticle = async (slug: string) => {
-  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}`);
+  const response = await fetch(`${ARTICLES_URL}/${slug}`);
   const { article } = await response.json();
 
   return article;
@@ -110,14 +105,14 @@ export const getComments = async (slug: string, token: string) => {
         },
       }
     : {};
-  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}/comments`, options);
+  const response = await fetch(`${ARTICLES_URL}/${slug}/comments`, options);
   const { comments } = await response.json();
 
   return comments;
 };
 
 export const postComment = async (slug: string, token: string, commentText: string) => {
-  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}/comments`, {
+  const response = await fetch(`${ARTICLES_URL}/${slug}/comments`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -135,7 +130,7 @@ export const postComment = async (slug: string, token: string, commentText: stri
 };
 
 export const deleteComment = async (slug: string, id: number, token: string) => {
-  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}/comments/${id}`, {
+  const response = await fetch(`${ARTICLES_URL}/${slug}/comments/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -148,7 +143,7 @@ export const deleteComment = async (slug: string, id: number, token: string) => 
 };
 
 export const deleteArticle = async (slug: string, token: string) => {
-  await fetch(`${CREATE_ARTICLE_URL}/${slug}`, {
+  await fetch(`${ARTICLES_URL}/${slug}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -158,7 +153,7 @@ export const deleteArticle = async (slug: string, token: string) => {
 };
 
 export const editArticle = async (slug: string, articleData: TArticleData, token: string) => {
-  const response = await fetch(`${CREATE_ARTICLE_URL}/${slug}`, {
+  const response = await fetch(`${ARTICLES_URL}/${slug}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
