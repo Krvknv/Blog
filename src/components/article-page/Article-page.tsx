@@ -204,7 +204,7 @@ const ArticlePage = () => {
           form={form}
           initialValues={{ remember: true }}
           autoComplete="off"
-          style={{ width: '600px', margin: '0 auto' }}
+          className={styles.form}
         >
           <Form.Item name="text">
             <TextArea placeholder="Write a comment..." rows={4} />

@@ -50,6 +50,7 @@ const Header = () => {
                 <img src={image} className={styles.image} />
                 {username}
               </NavLink>
+
               <NavLink to="/settings" style={chooseLinkStyle}>
                 Settings
               </NavLink>
@@ -69,6 +70,7 @@ const Header = () => {
               <NavLink to="/sign-in" style={chooseLinkStyle}>
                 Sign In
               </NavLink>
+
               <NavLink to="/sign-up" style={chooseLinkStyle}>
                 Sign Up
               </NavLink>

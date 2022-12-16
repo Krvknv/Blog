@@ -31,6 +31,7 @@ const Card = (props: { articleData: TArcticle; setIsSend?: (value: string) => vo
 
       setIsLiked(article.favorited);
       setLikeNum(article.favoritesCount);
+
       if (setIsSend) {
         setIsSend(JSON.stringify(article));
       }

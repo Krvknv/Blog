@@ -68,6 +68,7 @@ const Settings = () => {
         <Form.Item label="Short bio about you" name="bio">
           <TextArea rows={4} />
         </Form.Item>
+
         <Form.Item label="Add link on your avatar" name="avatar">
           <Input />
         </Form.Item>

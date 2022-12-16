@@ -1,3 +1,7 @@
+.form {
+  width: 600px;
+  margin: 0 auto;
+}
 .author {
   display: flex;
   align-items: center;

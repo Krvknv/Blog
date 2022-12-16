@@ -66,6 +66,7 @@ const MainPage = () => {
       setCardsList(articles);
       setArticlesQuantity(articlesCount);
     };
+
     request();
   }, [dispatch, offset, showTabs, tabsValue, token]);
 
@@ -130,6 +131,7 @@ const MainPage = () => {
           children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
       ];
+
   return (
     <>
       <ColorBox>

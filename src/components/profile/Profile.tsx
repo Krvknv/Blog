@@ -103,9 +103,11 @@ const Profile = () => {
     <>
       <ColorBox>
         <img className={styles.avatar} src={avatar} alt="" />
+
         <Title style={{ color: '#fff' }} level={2}>
           {id}
         </Title>
+
         {token && id === username ? (
           <NavLink className={styles.link} to="/settings">
             Edit profile
