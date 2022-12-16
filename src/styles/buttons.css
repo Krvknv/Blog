@@ -1,0 +1,45 @@
+.button-follow {
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background: transparent;
+}
+
+.button-follow:hover {
+  border: 1px solid #fff !important;
+  color: #fff !important;
+  transform: translate(0, -3px);
+}
+
+.button-like {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.button-like-arctive {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.button-like:hover,
+.button-like-arctive:hover {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  transform: translate(0, -3px);
+}
+
+.button-like-arctive:hover {
+  border-color: var(--color-primary) !important;
+  color: #fff !important;
+}

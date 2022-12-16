@@ -1,0 +1,28 @@
+@import './ant-styles.css';
+@import './buttons.css';
+
+:root {
+  --color-primary: #adc5a2;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main {
+  min-height: calc(100vh - 246px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}

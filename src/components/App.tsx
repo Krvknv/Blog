@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './Layout';
 
-import '../global.css';
+import '../styles/global.css';
 import FormPage from './sign-page/Sign-page';
 import { store } from 'features/store';
 import { Provider } from 'react-redux';
