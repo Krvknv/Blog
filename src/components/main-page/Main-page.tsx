@@ -20,6 +20,7 @@ const MainPage = () => {
   const [current, setCurrent] = useState(1);
   const [offset, setOffset] = useState(0);
   const [tabsValue, setTabsValue] = useState('local');
+  const [showTabs, setShowTabs] = useState('');
 
   const onChangePage: PaginationProps['onChange'] = (page) => {
     const offsetNum = (page - 1) * 10;
@@ -30,7 +31,6 @@ const MainPage = () => {
 
   const dispatch = useAppDispatch();
 
-  // const { pagesQuantity } = useAppSelector((state) => state.articleSlice);
   const { token } = useAppSelector((state) => state.userSlice);
 
   const handleChangeTab = (key: string) => {
@@ -55,22 +55,86 @@ const MainPage = () => {
       if (token) {
         if (tabsValue === 'local') {
           ({ articles, articlesCount } = await getLocalArticle(token, offset));
+        } else if (tabsValue === 'tag') {
+          ({ articles, articlesCount } = await getGlobalArticles({ ...params, tag: showTabs }));
         } else {
           ({ articles, articlesCount } = await getGlobalArticlesSignIn(params, token));
         }
       } else {
-        ({ articles, articlesCount } = await getGlobalArticles(params));
+        if (tabsValue === 'tag')
+          ({ articles, articlesCount } = await getGlobalArticles({ ...params, tag: showTabs }));
+        else {
+          ({ articles, articlesCount } = await getGlobalArticles(params));
+        }
       }
-
-      const pages = Math.ceil(articlesCount / 10);
 
       setCardsList(articles);
       setArticlesQuantity(articlesCount);
     };
-
     request();
-  }, [dispatch, offset, tabsValue, token]);
+  }, [dispatch, offset, showTabs, tabsValue, token]);
 
+  const tabsItemAuth = showTabs
+    ? [
+        {
+          label: `Global feed`,
+          key: 'global',
+          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+        },
+        {
+          label: `Your feed`,
+          key: 'local',
+          children:
+            cardsList.length > 0 ? (
+              cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
+            ) : (
+              <p>There are not posts</p>
+            ),
+        },
+        {
+          label: `${showTabs}`,
+          key: 'tag',
+          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+        },
+      ]
+    : [
+        {
+          label: `Global feed`,
+          key: 'global',
+          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+        },
+        {
+          label: `Your feed`,
+          key: 'local',
+          children:
+            cardsList.length > 0 ? (
+              cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
+            ) : (
+              <p>There are not posts</p>
+            ),
+        },
+      ];
+
+  const tabsItem = showTabs
+    ? [
+        {
+          label: `Global feed`,
+          key: 'global',
+          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+        },
+        {
+          label: `${showTabs}`,
+          key: 'tag',
+          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+        },
+      ]
+    : [
+        {
+          label: `Global feed`,
+          key: 'global',
+          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+        },
+      ];
   return (
     <>
       <ColorBox>
@@ -79,39 +143,22 @@ const MainPage = () => {
       </ColorBox>
 
       <div className={styles.cards}>
-        <TagsList />
+        <TagsList setShowTabs={setShowTabs} />
 
         {token ? (
           <Tabs
             defaultActiveKey="local"
             style={{ width: '1200px', marginBottom: '50px' }}
             onChange={handleChangeTab}
-            items={[
-              {
-                label: `Global feed`,
-                key: 'global',
-                children: cardsList.map((item: TArcticle) => (
-                  <Card articleData={item} key={item.slug} />
-                )),
-              },
-              {
-                label: `Your feed`,
-                key: 'local',
-                children:
-                  cardsList.length > 0 ? (
-                    cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
-                  ) : (
-                    <p>There are not posts</p>
-                  ),
-              },
-            ]}
+            items={tabsItemAuth}
           />
         ) : (
-          <div className={styles.cards}>
-            {cardsList.map((item: TArcticle) => (
-              <Card articleData={item} key={item.slug} />
-            ))}
-          </div>
+          <Tabs
+            defaultActiveKey="local"
+            style={{ width: '1200px', marginBottom: '50px' }}
+            onChange={handleChangeTab}
+            items={tabsItem}
+          />
         )}
       </div>
 

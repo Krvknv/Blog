@@ -24,7 +24,6 @@ export const createArticle = async (articleData: TArticleData, token: string) =>
 
 export const getGlobalArticles = async (params: { [index: string]: string | number }) => {
   const paramsString = modifyParams(params);
-
   const response = await fetch(`${GET_GLOBAL_ARTICLE_URL}?${paramsString}`);
 
   const responseJson = await response.json();
