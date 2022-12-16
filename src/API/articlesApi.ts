@@ -22,28 +22,21 @@ export const createArticle = async (articleData: TArticleData, token: string) =>
   return responseJson;
 };
 
-export const getGlobalArticles = async (params: { [index: string]: string | number }) => {
-  const paramsString = modifyParams(params);
-  const response = await fetch(`${GET_GLOBAL_ARTICLE_URL}?${paramsString}`);
-
-  const responseJson = await response.json();
-
-  return responseJson;
-};
-
-export const getGlobalArticlesSignIn = async (
+export const getGlobalArticles = async (
   params: { [index: string]: string | number },
   token: string
 ) => {
+  const options = token
+    ? {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    : {};
   const paramsString = modifyParams(params);
-
-  const response = await fetch(`${GET_GLOBAL_ARTICLE_URL}?${paramsString}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await fetch(`${GET_GLOBAL_ARTICLE_URL}?${paramsString}`, options);
 
   const responseJson = await response.json();
 

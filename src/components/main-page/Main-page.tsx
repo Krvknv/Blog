@@ -7,7 +7,7 @@ const { Text, Title } = Typography;
 
 import styles from './main-page.module.css';
 
-import { getGlobalArticles, getGlobalArticlesSignIn, getLocalArticle } from 'API/articlesApi';
+import { getGlobalArticles, getLocalArticle } from 'API/articlesApi';
 import { TArcticle, TArcticleArgs } from 'types/types';
 import Card from 'components/card/Card';
 import TagsList from 'components/tags-list/Tags-list';
@@ -19,7 +19,7 @@ const MainPage = () => {
   const [articlesQuantity, setArticlesQuantity] = useState(0);
   const [current, setCurrent] = useState(1);
   const [offset, setOffset] = useState(0);
-  const [tabsValue, setTabsValue] = useState('local');
+  const [tabsValue, setTabsValue] = useState('global');
   const [showTabs, setShowTabs] = useState('');
 
   const onChangePage: PaginationProps['onChange'] = (page) => {
@@ -52,20 +52,15 @@ const MainPage = () => {
       let articles;
       let articlesCount;
 
-      if (token) {
-        if (tabsValue === 'local') {
-          ({ articles, articlesCount } = await getLocalArticle(token, offset));
-        } else if (tabsValue === 'tag') {
-          ({ articles, articlesCount } = await getGlobalArticles({ ...params, tag: showTabs }));
-        } else {
-          ({ articles, articlesCount } = await getGlobalArticlesSignIn(params, token));
-        }
+      if (tabsValue === 'local') {
+        ({ articles, articlesCount } = await getLocalArticle(token, offset));
+      } else if (tabsValue === 'tag') {
+        ({ articles, articlesCount } = await getGlobalArticles(
+          { ...params, tag: showTabs },
+          token
+        ));
       } else {
-        if (tabsValue === 'tag')
-          ({ articles, articlesCount } = await getGlobalArticles({ ...params, tag: showTabs }));
-        else {
-          ({ articles, articlesCount } = await getGlobalArticles(params));
-        }
+        ({ articles, articlesCount } = await getGlobalArticles(params, token));
       }
 
       setCardsList(articles);
@@ -147,14 +142,14 @@ const MainPage = () => {
 
         {token ? (
           <Tabs
-            defaultActiveKey="local"
+            defaultActiveKey="global"
             style={{ width: '1200px', marginBottom: '50px' }}
             onChange={handleChangeTab}
             items={tabsItemAuth}
           />
         ) : (
           <Tabs
-            defaultActiveKey="local"
+            defaultActiveKey="global"
             style={{ width: '1200px', marginBottom: '50px' }}
             onChange={handleChangeTab}
             items={tabsItem}

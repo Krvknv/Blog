@@ -9,7 +9,7 @@ const { Title } = Typography;
 import styles from './profile.module.css';
 import ColorBox from 'components/color-box/Color-box';
 import { TArcticle, TArcticleArgs } from 'types/types';
-import { getGlobalArticles, getGlobalArticlesSignIn } from 'API/articlesApi';
+import { getGlobalArticles } from 'API/articlesApi';
 import Card from 'components/card/Card';
 import { followUser, getProfile, unfollowUser } from 'API/userApi';
 
@@ -73,12 +73,15 @@ const Profile = () => {
       const paramItem = tabsValue === 'myArticle' ? 'author' : 'favorited';
 
       if (token || id === username) {
-        ({ articles, articlesCount } = await getGlobalArticlesSignIn(
+        ({ articles, articlesCount } = await getGlobalArticles(
           { ...params, [paramItem]: id! },
           token
         ));
       } else {
-        ({ articles, articlesCount } = await getGlobalArticles({ ...params, [paramItem]: id! }));
+        ({ articles, articlesCount } = await getGlobalArticles(
+          { ...params, [paramItem]: id! },
+          token
+        ));
       }
 
       const { image, following } = await getProfile(id!, token);
