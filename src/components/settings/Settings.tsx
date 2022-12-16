@@ -73,7 +73,7 @@ const Settings = () => {
           <Input />
         </Form.Item>
 
-        <Form.Item label="Password" name="password">
+        <Form.Item label="Password" name="password" style={{ marginBottom: '40px' }}>
           <Input.Password />
         </Form.Item>
 
