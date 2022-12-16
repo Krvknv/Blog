@@ -1,6 +1,6 @@
 import { Card, Tag } from 'antd';
 import { getTags } from 'API/articlesApi';
-import React, { MouseEventHandler, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const TagsList = (props: { setShowTabs: (value: string) => void }) => {
   const { setShowTabs } = props;

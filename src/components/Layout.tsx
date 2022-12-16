@@ -9,7 +9,6 @@ const Layout = () => {
       <Header />
       <main className="main">
         <Outlet />
-        {/* <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}></div> */}
       </main>
       <Footer />
     </>

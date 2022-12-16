@@ -70,22 +70,6 @@ const Settings = () => {
         </Form.Item>
         <Form.Item label="Add link on your avatar" name="avatar">
           <Input />
-          {/* <ImgCrop rotate>
-            <Upload
-              name="avatar"
-              listType="picture-card"
-              className="avatar-uploader"
-              maxCount={1}
-              //   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              onChange={handleChange}
-            >
-              {imageUrl ? (
-                <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
-              ) : (
-                uploadButton
-              )}
-            </Upload>
-          </ImgCrop> */}
         </Form.Item>
 
         <Form.Item label="Password" name="password">
