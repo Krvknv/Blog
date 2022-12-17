@@ -13,7 +13,7 @@ import { favoriteArticle, unfavoriteArticle } from 'API/articlesApi';
 
 const { Title, Text } = Typography;
 
-const Card = (props: { articleData: TArcticle; setIsSend?: (value: string) => void }) => {
+export const Card = (props: { articleData: TArcticle; setIsSend?: (value: string) => void }) => {
   const { articleData, setIsSend } = props;
 
   const [isLiked, setIsLiked] = useState(articleData.favorited);
@@ -103,5 +103,3 @@ const Card = (props: { articleData: TArcticle; setIsSend?: (value: string) => vo
     </div>
   );
 };
-
-export default Card;

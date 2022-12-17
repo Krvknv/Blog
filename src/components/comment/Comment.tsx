@@ -13,14 +13,15 @@ import { modifyDate } from 'features/helpers/modify-date';
 import Delete from 'components/icons/Detele';
 import { deleteComment } from 'API/articlesApi';
 
-const Comment = (props: {
+interface ICommentProps {
   comment: TComment;
   articleDta: TArcticle;
   setSend: (value: string) => void;
-}) => {
+}
+
+const Comment: React.FC<ICommentProps> = ({ comment, articleDta, setSend }) => {
   const { username, token } = useAppSelector((state) => state.userSlice);
 
-  const { comment, articleDta, setSend } = props;
   const handleDeleteComment = async () => {
     const response = await deleteComment(articleDta.slug, comment.id, token);
     setSend(String(response));

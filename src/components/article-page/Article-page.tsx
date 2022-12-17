@@ -6,7 +6,10 @@ import {
   postComment,
   unfavoriteArticle,
 } from 'API/articlesApi';
-import ColorBox from 'components/color-box/Color-box';
+
+import { ColorBox } from 'components';
+
+//  sort imports
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
@@ -127,6 +130,8 @@ const ArticlePage = () => {
     request();
   }, [id, token, username, send, dispatch]);
 
+  const authorAvatar = image || 'https://api.realworld.io/images/smiley-cyrus.jpeg';
+
   return (
     <>
       <ColorBox>
@@ -186,6 +191,7 @@ const ArticlePage = () => {
       <div className="container">
         <Text className={styles.text}>{articleData?.body}</Text>
         <div className={styles.tags}>
+          {/* useMemo */}
           {articleData?.tagList.map((item, index) => (
             <Tag key={index} color="lime">
               {item}
@@ -194,7 +200,10 @@ const ArticlePage = () => {
         </div>
         <Divider />
 
+        {/* <Commetns data={commentsList/> */}
+
         <div className={styles['comments-list']}>
+          {/* useMemo */}
           {commentsList.map((item: TComment) => (
             <Comment key={item.id} comment={item} articleDta={articleData!} setSend={setSend} />
           ))}
@@ -212,11 +221,8 @@ const ArticlePage = () => {
 
           <Form.Item>
             <div className={styles['comment-form-footer']}>
-              <img
-                className={styles.avatar}
-                src={image || 'https://api.realworld.io/images/smiley-cyrus.jpeg'}
-                alt=""
-              />
+              {/* authorAvatar */}
+              <img className={styles.avatar} src={authorAvatar} alt="Author" />
 
               <Button shape="round" className={styles['button-post']} onClick={handlePostComment}>
                 Post comment

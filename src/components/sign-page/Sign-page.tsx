@@ -1,35 +1,35 @@
 import React from 'react';
-
-import { Typography } from 'antd';
-import { Button, Form, Input } from 'antd';
-
-import styles from './sign-page.module.css';
 import { useAppDispatch, useAppSelector } from 'features/redux';
-import { enterUser, registerUser } from 'API/userApi';
+
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
+import { Button, Form, Input, Typography } from 'antd';
 const { Title, Text } = Typography;
 
-const SignPage = () => {
-  const dispatch = useAppDispatch();
+import { enterUser, registerUser } from 'API/userApi';
 
+import styles from './sign-page.module.css';
+
+export const SignPage = () => {
   const { isExist, incorrectValue } = useAppSelector((state) => state.userSlice);
-
   const { pathname } = useLocation();
+
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [form] = Form.useForm();
-  const userName = Form.useWatch('username', form);
-  const userEmail = Form.useWatch('email', form);
-  const userPassword = Form.useWatch('password', form);
+  const username = Form.useWatch('username', form);
+  const email = Form.useWatch('email', form);
+  const password = Form.useWatch('password', form);
 
+  // useCallback
   const handleRegister = () => {
-    dispatch(registerUser({ username: userName, email: userEmail, password: userPassword }));
+    dispatch(registerUser({ username, email, password }));
     navigate('/');
   };
 
   const handleEnter = () => {
-    dispatch(enterUser({ email: userEmail, password: userPassword }));
+    dispatch(enterUser({ email, password }));
     navigate('/');
   };
 
@@ -71,6 +71,7 @@ const SignPage = () => {
             <Text type="danger">This person is already registered</Text>
           </Form.Item>
         )}
+
         {incorrectValue && (
           <Form.Item>
             <Text type="danger">Incorrect values</Text>
@@ -122,5 +123,3 @@ const SignPage = () => {
     </>
   );
 };
-
-export default SignPage;

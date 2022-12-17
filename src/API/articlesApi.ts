@@ -38,6 +38,20 @@ export const getGlobalArticles = async (
   return responseJson;
 };
 
+export const getLocalArticle = async (token: string, offset: number) => {
+  const response = await fetch(`${GET_YOUR_FEED_URL}?limit=20&offset=${offset}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const responseJson = response.json();
+
+  return responseJson;
+};
+
 export const getTags = async () => {
   const response = await fetch(GET_TAGS_URL);
 
@@ -74,20 +88,6 @@ export const unfavoriteArticle = async (slug: string, token: string) => {
   return responseJson;
 };
 
-export const getLocalArticle = async (token: string, offset: number) => {
-  const response = await fetch(`${GET_YOUR_FEED_URL}?limit=20&offset=${offset}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  const responseJson = response.json();
-
-  return responseJson;
-};
-
 export const getArticle = async (slug: string) => {
   const response = await fetch(`${ARTICLES_URL}/${slug}`);
   const { article } = await response.json();
@@ -105,6 +105,7 @@ export const getComments = async (slug: string, token: string) => {
         },
       }
     : {};
+
   const response = await fetch(`${ARTICLES_URL}/${slug}/comments`, options);
   const { comments } = await response.json();
 

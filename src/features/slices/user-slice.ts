@@ -26,24 +26,22 @@ const sliceUser = createSlice({
   name: 'user',
   initialState: initialStateUser,
   reducers: {
-    setUserData(state, action) {
-      const { token, username, email, bio, image } = action.payload;
-      state.token = token;
-      state.username = username;
-      state.email = email;
-      state.bio = bio;
-      state.image = image;
+    // PayloadAction
+    setUserData(state, action: PayloadAction<any>) {
+      // const { token, username, email, bio, image } = action.payload;
+      state = { ...state, ...action.payload };
     },
   },
   extraReducers: {
     [registerUser.fulfilled.type]: (state, action: PayloadAction<TFullUserData>) => {
-      const { token, username, email, bio, image } = action.payload;
-      state.token = token;
-      state.username = username;
-      state.email = email;
-      state.bio = bio;
-      state.image = image;
-      state.isExist = false;
+      // const { token, username, email, bio, image } = action.payload;
+      state = { ...state, ...action.payload };
+      // state.token = token;
+      // state.username = username;
+      // state.email = email;
+      // state.bio = bio;
+      // state.image = image;
+      // state.isExist = false;
     },
     [registerUser.rejected.type]: (state) => {
       state.isExist = true;

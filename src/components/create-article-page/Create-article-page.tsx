@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from 'features/redux';
+import { setAticleInfo } from 'features/slices/article-slice';
 
 import { Typography } from 'antd';
 import { Button, Form, Input } from 'antd';
@@ -6,11 +10,9 @@ import { Button, Form, Input } from 'antd';
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
-import styles from './create-article-page.module.css';
 import { createArticle, editArticle } from 'API/articlesApi';
-import { useAppDispatch, useAppSelector } from 'features/redux';
-import { useNavigate } from 'react-router-dom';
-import { setAticleInfo } from 'features/slices/article-slice';
+
+import styles from './create-article-page.module.css';
 
 const CreateArticlePage = () => {
   const navigate = useNavigate();
@@ -77,6 +79,7 @@ const CreateArticlePage = () => {
     if ('article' in response) {
       setIsCreated(true);
       setIsEdit(false);
+
       dispatch(
         setAticleInfo({
           name: '',
@@ -86,12 +89,17 @@ const CreateArticlePage = () => {
           tagsList: [],
         })
       );
+
       navigate(`/article/${response.article.slug}`);
     }
   };
 
   useEffect(() => {
-    if (!token) navigate('/');
+    if (!token) {
+      navigate('/');
+
+      return;
+    }
 
     const isEditValue = name ? true : false;
     setIsEdit(isEditValue);
@@ -105,6 +113,7 @@ const CreateArticlePage = () => {
 
       <Form
         initialValues={
+          // useMemo
           name
             ? { title: name, about: description, text: body, tags: tagsList.join(',') }
             : { title: '', about: '', text: '', tags: '' }

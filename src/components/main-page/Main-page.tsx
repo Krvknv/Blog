@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
-import ColorBox from 'components/color-box/Color-box';
+import { ColorBox, Card } from 'components/';
+
+import TagsList from 'components/tags-list/Tags-list';
 
 import { Tabs, Typography } from 'antd';
 const { Text, Title } = Typography;
@@ -9,30 +11,43 @@ import styles from './main-page.module.css';
 
 import { getGlobalArticles, getLocalArticle } from 'API/articlesApi';
 import { TArcticle, TArcticleArgs } from 'types/types';
-import Card from 'components/card/Card';
-import TagsList from 'components/tags-list/Tags-list';
 import { useAppDispatch, useAppSelector } from 'features/redux';
 import { Pagination, PaginationProps } from 'antd';
 
+type TTabKeys = {
+  LOCAL: 'local';
+  GLOBAL: 'global';
+  TAG: 'tag';
+};
+
+const tabKeys: TTabKeys = {
+  LOCAL: 'local',
+  GLOBAL: 'global',
+  TAG: 'tag',
+};
+
 const MainPage = () => {
-  const [cardsList, setCardsList] = useState([]);
+  console.log('render');
+
+  const [cards, setCards] = useState([]);
+
   const [articlesQuantity, setArticlesQuantity] = useState(0);
   const [current, setCurrent] = useState(1);
   const [offset, setOffset] = useState(0);
   const [tabsValue, setTabsValue] = useState('global');
   const [showTabs, setShowTabs] = useState('');
 
-  const onChangePage: PaginationProps['onChange'] = (page) => {
-    const offsetNum = (page - 1) * 10;
-
-    setCurrent(page);
-    setOffset(offsetNum);
-  };
-
+  const { token } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
 
-  const { token } = useAppSelector((state) => state.userSlice);
+  const onChangePage: PaginationProps['onChange'] = useCallback((page: number) => {
+    const offsetNum = (page - 1) * 10;
+    // skip?
+    setCurrent(page);
+    setOffset(offsetNum);
+  }, []);
 
+  // useCallback
   const handleChangeTab = (key: string) => {
     setCurrent(1);
     setTabsValue(key);
@@ -49,22 +64,21 @@ const MainPage = () => {
         offset: offset,
       };
 
-      let articles;
-      let articlesCount;
-
+      let response;
       if (tabsValue === 'local') {
-        ({ articles, articlesCount } = await getLocalArticle(token, offset));
-      } else if (tabsValue === 'tag') {
-        ({ articles, articlesCount } = await getGlobalArticles(
-          { ...params, tag: showTabs },
-          token
-        ));
-      } else {
-        ({ articles, articlesCount } = await getGlobalArticles(params, token));
+        response = await getLocalArticle(token, offset);
       }
 
-      setCardsList(articles);
-      setArticlesQuantity(articlesCount);
+      if (tabsValue === 'tag') {
+        response = await getGlobalArticles({ ...params, tag: showTabs }, token);
+      }
+
+      if (tabsValue === 'global') {
+        response = await getGlobalArticles(params, token);
+      }
+
+      setCards(response.articles);
+      setArticlesQuantity(response.articlesCount);
     };
 
     request();
@@ -75,14 +89,14 @@ const MainPage = () => {
         {
           label: `Global feed`,
           key: 'global',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
         {
           label: `Your feed`,
           key: 'local',
           children:
-            cardsList.length > 0 ? (
-              cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
+            cards.length > 0 ? (
+              cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
             ) : (
               <p>There are not posts</p>
             ),
@@ -90,21 +104,21 @@ const MainPage = () => {
         {
           label: `${showTabs}`,
           key: 'tag',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
       ]
     : [
         {
           label: `Global feed`,
           key: 'global',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
         {
           label: `Your feed`,
           key: 'local',
           children:
-            cardsList.length > 0 ? (
-              cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
+            cards.length > 0 ? (
+              cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
             ) : (
               <p>There are not posts</p>
             ),
@@ -116,19 +130,19 @@ const MainPage = () => {
         {
           label: `Global feed`,
           key: 'global',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
         {
           label: `${showTabs}`,
           key: 'tag',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
       ]
     : [
         {
           label: `Global feed`,
           key: 'global',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
       ];
 

@@ -26,10 +26,6 @@ const Settings = () => {
   const userAvatar = Form.useWatch('avatar', form);
   const userPassword = Form.useWatch('password', form);
 
-  useEffect(() => {
-    if (!token) navigate('/');
-  });
-
   const handleEdit = () => {
     const userData: { [index: string]: string } = {
       email: userEmail,
@@ -39,6 +35,7 @@ const Settings = () => {
       image: userAvatar,
     };
 
+    // [index:string] type
     const validatedData: { [index: string]: string } = {};
 
     for (const key in userData) {
@@ -50,6 +47,13 @@ const Settings = () => {
 
     form.resetFields();
   };
+
+  if (!token) {
+    navigate('/');
+
+    return null;
+  }
+
   return (
     <>
       <Title level={2} style={{ marginBottom: '40px' }} className={styles.title}>

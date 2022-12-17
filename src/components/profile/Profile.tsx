@@ -7,10 +7,11 @@ import { Button, Pagination, PaginationProps, Tabs, Typography } from 'antd';
 const { Title } = Typography;
 
 import styles from './profile.module.css';
-import ColorBox from 'components/color-box/Color-box';
+
+import { Card, ColorBox } from 'components';
+
 import { TArcticle, TArcticleArgs } from 'types/types';
 import { getGlobalArticles } from 'API/articlesApi';
-import Card from 'components/card/Card';
 import { followUser, getProfile, unfollowUser } from 'API/userApi';
 
 const Profile = () => {
@@ -46,12 +47,11 @@ const Profile = () => {
 
     let following;
 
-    if (isFollowed) {
-      ({ following } = await unfollowUser(id!, token));
+    if (isFollowed && id) {
+      ({ following } = await unfollowUser(id, token));
     }
-
-    if (!isFollowed) {
-      ({ following } = await followUser(id!, token));
+    if (!isFollowed && id) {
+      ({ following } = await followUser(id, token));
     }
 
     setIsFollowed(following);
@@ -72,17 +72,22 @@ const Profile = () => {
 
       const paramItem = tabsValue === 'myArticle' ? 'author' : 'favorited';
 
-      if (token || id === username) {
+      const isMyPage = token || id === username;
+
+      if (isMyPage) {
         ({ articles, articlesCount } = await getGlobalArticles(
           { ...params, [paramItem]: id! },
           token
         ));
+        // dublicate
       } else {
         ({ articles, articlesCount } = await getGlobalArticles(
           { ...params, [paramItem]: id! },
           token
         ));
       }
+      // id!
+      // username id
 
       const { image, following } = await getProfile(id!, token);
 
@@ -93,8 +98,10 @@ const Profile = () => {
     };
 
     request();
-  }, [id, navigate, offset, tabsValue, token, username, isSend]);
+    // зависимости
+  }, [id, offset, tabsValue, token, username, isSend]);
 
+  // useMemo
   const Cards = cardsList.map((item: TArcticle) => (
     <Card articleData={item} key={item.slug} setIsSend={setIsSend} />
   ));
@@ -120,6 +127,7 @@ const Profile = () => {
       </ColorBox>
 
       <div className="container">
+        {/* children ? */}
         <Tabs
           defaultActiveKey="myArticle"
           onChange={handleChangeTab}

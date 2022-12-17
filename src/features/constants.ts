@@ -8,3 +8,5 @@ export const ARTICLES_URL = 'https://api.realworld.io/api/articles';
 export const GET_YOUR_FEED_URL = 'https://api.realworld.io/api/articles/feed';
 
 export const GET_TAGS_URL = 'https://api.realworld.io/api/tags';
+
+export const API_URL = 'https://api.realworld.io/api';

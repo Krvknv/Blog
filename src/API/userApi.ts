@@ -67,6 +67,7 @@ export const editUser = createAsyncThunk(
   }
 );
 
+// Error check
 export const getProfile = async (username: string, token: string) => {
   const options = token
     ? {

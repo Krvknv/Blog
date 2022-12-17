@@ -10,6 +10,7 @@ const TagsList = (props: { setShowTabs: (value: string) => void }) => {
   const handleClick = (item: string) => {
     setShowTabs(item);
   };
+
   useEffect(() => {
     const request = async () => {
       const tags = await getTags();
@@ -34,4 +35,5 @@ const TagsList = (props: { setShowTabs: (value: string) => void }) => {
     </Card>
   );
 };
+
 export default TagsList;
