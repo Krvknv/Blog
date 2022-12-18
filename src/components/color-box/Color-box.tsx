@@ -6,6 +6,6 @@ type TColorBoxProps = {
   children: ReactNode;
 };
 
-export const ColorBox: React.FC<TColorBoxProps> = ({ children }) => {
-  return <div className={styles.divider}>{children}</div>;
-};
+export const ColorBox: React.FC<TColorBoxProps> = ({ children }) => (
+  <div className={styles.divider}>{children}</div>
+);
