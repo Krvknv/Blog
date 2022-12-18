@@ -28,7 +28,12 @@ export const TagsList = (props: { setShowTabs: (value: string) => void }) => {
   return (
     <Card title="Popular tags" bordered={true} style={tagsStyle}>
       {tagsList.map((item, index) => (
-        <Tag key={index} color="lime" onClick={handleClick.bind(this, item)}>
+        <Tag
+          key={index}
+          color="lime"
+          onClick={handleClick.bind(this, item)}
+          style={{ cursor: 'pointer' }}
+        >
           {item}
         </Tag>
       ))}
