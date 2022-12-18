@@ -39,7 +39,7 @@ export const ArticlePage = () => {
   const [isFollowed, setIsFollowed] = useState<boolean>();
   const [isLiked, setIsLiked] = useState<boolean>();
   const [articleData, setArticleData] = useState<TArcticle>();
-  const [commentsList, setCommnetsList] = useState<TComment[]>([]);
+  const [comments, setCommnets] = useState<TComment[]>([]);
   const [likeNum, setLikeNum] = useState<number>();
   const [send, setSend] = useState<string>();
 
@@ -118,7 +118,7 @@ export const ArticlePage = () => {
       }
 
       setLikeNum(article.favoritesCount);
-      setCommnetsList(comments);
+      setCommnets(comments);
       setArticleData(article);
     };
 
@@ -192,8 +192,8 @@ export const ArticlePage = () => {
         </div>
         <Divider />
 
-        <div className={styles['comments-list']}>
-          {commentsList.map((item: TComment) => (
+        <div className={styles['comments']}>
+          {comments.map((item: TComment) => (
             <Comment key={item.id} comment={item} articleDta={articleData!} setSend={setSend} />
           ))}
         </div>

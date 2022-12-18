@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { getGlobalArticles, getLocalArticle } from 'API/articlesApi';
 import { Tabs, Typography, Pagination, PaginationProps } from 'antd';
-import { ColorBox, Card, TagsList } from 'components/';
+import { ColorBox, Card, Tags } from 'components/';
 import { useAppDispatch, useAppSelector } from 'features/redux';
 import { TArcticle, TArcticleArgs } from 'types/types';
 
@@ -11,7 +11,7 @@ import styles from './main-page.module.css';
 const { Text, Title } = Typography;
 
 export const MainPage = () => {
-  const [cardsList, setCardsList] = useState<TArcticle[]>([]);
+  const [cards, setCards] = useState<TArcticle[]>([]);
   const [articlesQuantity, setArticlesQuantity] = useState<number>(0);
   const [current, setCurrent] = useState<number>(1);
   const [offset, setOffset] = useState<number>(0);
@@ -59,7 +59,7 @@ export const MainPage = () => {
         ({ articles, articlesCount } = await getGlobalArticles(params, token));
       }
 
-      setCardsList(articles);
+      setCards(articles);
       setArticlesQuantity(articlesCount);
     };
 
@@ -71,14 +71,14 @@ export const MainPage = () => {
         {
           label: `Global feed`,
           key: 'global',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
         {
           label: `Your feed`,
           key: 'local',
           children:
-            cardsList.length > 0 ? (
-              cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
+            cards.length > 0 ? (
+              cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
             ) : (
               <p>There are not posts</p>
             ),
@@ -86,21 +86,21 @@ export const MainPage = () => {
         {
           label: `${showTabs}`,
           key: 'tag',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
       ]
     : [
         {
           label: `Global feed`,
           key: 'global',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
         {
           label: `Your feed`,
           key: 'local',
           children:
-            cardsList.length > 0 ? (
-              cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
+            cards.length > 0 ? (
+              cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />)
             ) : (
               <p>There are not posts</p>
             ),
@@ -112,19 +112,19 @@ export const MainPage = () => {
         {
           label: `Global feed`,
           key: 'global',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
         {
           label: `${showTabs}`,
           key: 'tag',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
       ]
     : [
         {
           label: `Global feed`,
           key: 'global',
-          children: cardsList.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
+          children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
       ];
 
@@ -136,7 +136,7 @@ export const MainPage = () => {
       </ColorBox>
 
       <div className={styles.cards}>
-        <TagsList setShowTabs={setShowTabs} />
+        <Tags setShowTabs={setShowTabs} />
 
         {token ? (
           <Tabs

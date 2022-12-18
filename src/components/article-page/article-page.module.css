@@ -44,7 +44,7 @@
   border-radius: 0 0 6px 6px;
 }
 
-.comments-list {
+.comments {
   display: flex;
   flex-direction: column;
   gap: 20px;

@@ -15,4 +15,4 @@ export { MainPage } from './main-page/Main-page';
 export { Profile } from './profile/Profile';
 export { Settings } from './settings/Settings';
 export { SignPage } from './sign-page/Sign-page';
-export { TagsList } from './tags-list/Tags-list';
+export { Tags } from './tags/Tags';

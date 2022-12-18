@@ -16,7 +16,7 @@ export const Profile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [cardsList, setCardsList] = useState<TArcticle[]>([]);
+  const [cards, setCards] = useState<TArcticle[]>([]);
   const [articlesQuantity, setArticlesQuantity] = useState<number>(0);
   const [current, setCurrent] = useState<number>(1);
   const [offset, setOffset] = useState<number>(0);
@@ -86,7 +86,7 @@ export const Profile = () => {
       const { image, following } = await getProfile(id!, token);
 
       setAvatar(image);
-      setCardsList(articles);
+      setCards(articles);
       setArticlesQuantity(articlesCount);
       setIsFollowed(following);
     };
@@ -94,7 +94,7 @@ export const Profile = () => {
     request();
   }, [id, navigate, offset, tabsValue, token, username, isSend]);
 
-  const Cards = cardsList.map((item: TArcticle) => (
+  const cardsList = cards.map((item: TArcticle) => (
     <Card articleData={item} key={item.slug} setIsSend={setIsSend} />
   ));
 
@@ -126,12 +126,12 @@ export const Profile = () => {
             {
               label: `My articles`,
               key: 'myArticle',
-              children: cardsList.length > 0 ? Cards : <p>There are not posts</p>,
+              children: cards.length > 0 ? cardsList : <p>There are not posts</p>,
             },
             {
               label: `Favorited articles`,
               key: 'favorite',
-              children: cardsList.length > 0 ? Cards : <p>There are not posts</p>,
+              children: cards.length > 0 ? cardsList : <p>There are not posts</p>,
             },
           ]}
         />

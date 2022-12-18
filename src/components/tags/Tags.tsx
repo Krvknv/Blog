@@ -7,7 +7,7 @@ type TTagsProps = {
   setShowTabs: (value: string) => void;
 };
 
-export const TagsList: React.FC<TTagsProps> = ({ setShowTabs }) => {
+export const Tags: React.FC<TTagsProps> = ({ setShowTabs }) => {
   const [tagsList, setTagsList] = useState<string[]>([]);
 
   const handleClick = (item: string) => {
