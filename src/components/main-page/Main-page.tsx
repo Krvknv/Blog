@@ -11,12 +11,12 @@ import styles from './main-page.module.css';
 const { Text, Title } = Typography;
 
 export const MainPage = () => {
-  const [cardsList, setCardsList] = useState([]);
-  const [articlesQuantity, setArticlesQuantity] = useState(0);
-  const [current, setCurrent] = useState(1);
-  const [offset, setOffset] = useState(0);
-  const [tabsValue, setTabsValue] = useState('global');
-  const [showTabs, setShowTabs] = useState('');
+  const [cardsList, setCardsList] = useState<TArcticle[]>([]);
+  const [articlesQuantity, setArticlesQuantity] = useState<number>(0);
+  const [current, setCurrent] = useState<number>(1);
+  const [offset, setOffset] = useState<number>(0);
+  const [tabsValue, setTabsValue] = useState<string>('global');
+  const [showTabs, setShowTabs] = useState<string>('');
 
   const onChangePage: PaginationProps['onChange'] = (page) => {
     const offsetNum = (page - 1) * 10;

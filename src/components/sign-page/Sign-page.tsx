@@ -18,6 +18,7 @@ export const SignPage = () => {
   const navigate = useNavigate();
 
   const [form] = Form.useForm();
+
   const userName = Form.useWatch('username', form);
   const userEmail = Form.useWatch('email', form);
   const userPassword = Form.useWatch('password', form);

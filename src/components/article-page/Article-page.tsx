@@ -36,11 +36,11 @@ export const ArticlePage = () => {
 
   const { token, image, username } = useAppSelector((state) => state.userSlice);
 
-  const [isFollowed, setIsFollowed] = useState();
-  const [isLiked, setIsLiked] = useState();
+  const [isFollowed, setIsFollowed] = useState<boolean>();
+  const [isLiked, setIsLiked] = useState<boolean>();
   const [articleData, setArticleData] = useState<TArcticle>();
   const [commentsList, setCommnetsList] = useState<TComment[]>([]);
-  const [likeNum, setLikeNum] = useState();
+  const [likeNum, setLikeNum] = useState<number>();
   const [send, setSend] = useState<string>();
 
   const date = articleData?.createdAt;
@@ -57,7 +57,6 @@ export const ArticlePage = () => {
         tagsList: article.tagList,
       })
     );
-
     navigate('/new-article');
   };
 

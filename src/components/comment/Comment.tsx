@@ -12,14 +12,15 @@ import styles from './comment.module.css';
 
 const { Text } = Typography;
 
-export const Comment = (props: {
+type TCommentProps = {
   comment: TComment;
   articleDta: TArcticle;
   setSend: (value: string) => void;
-}) => {
+};
+
+export const Comment: React.FC<TCommentProps> = ({ comment, articleDta, setSend }) => {
   const { username, token } = useAppSelector((state) => state.userSlice);
 
-  const { comment, articleDta, setSend } = props;
   const handleDeleteComment = async () => {
     const response = await deleteComment(articleDta.slug, comment.id, token);
     setSend(String(response));

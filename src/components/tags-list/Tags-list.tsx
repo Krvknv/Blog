@@ -3,14 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { getTags } from 'API/articlesApi';
 import { Card, Tag } from 'antd';
 
-export const TagsList = (props: { setShowTabs: (value: string) => void }) => {
-  const { setShowTabs } = props;
+type TTagsProps = {
+  setShowTabs: (value: string) => void;
+};
 
-  const [tagsList, setTagsList] = useState([]);
+export const TagsList: React.FC<TTagsProps> = ({ setShowTabs }) => {
+  const [tagsList, setTagsList] = useState<string[]>([]);
 
   const handleClick = (item: string) => {
     setShowTabs(item);
   };
+
   useEffect(() => {
     const request = async () => {
       const tags = await getTags();

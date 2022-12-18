@@ -12,11 +12,14 @@ import styles from './card.module.css';
 
 const { Title, Text } = Typography;
 
-export const Card = (props: { articleData: TArcticle; setIsSend?: (value: string) => void }) => {
-  const { articleData, setIsSend } = props;
+type TCardsProps = {
+  articleData: TArcticle;
+  setIsSend?: (value: string) => void;
+};
 
-  const [isLiked, setIsLiked] = useState(articleData.favorited);
-  const [likeNum, setLikeNum] = useState(articleData.favoritesCount);
+export const Card: React.FC<TCardsProps> = ({ articleData, setIsSend }) => {
+  const [isLiked, setIsLiked] = useState<boolean>(articleData.favorited);
+  const [likeNum, setLikeNum] = useState<number>(articleData.favoritesCount);
 
   const navigate = useNavigate();
 

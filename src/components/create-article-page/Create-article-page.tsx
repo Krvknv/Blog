@@ -26,9 +26,9 @@ export const CreateArticlePage = () => {
   const text = Form.useWatch('text', form);
   const tags = Form.useWatch('tags', form);
 
-  const [isUniq, setIsUniq] = useState(false);
-  const [isCreated, setIsCreated] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
+  const [isUniq, setIsUniq] = useState<boolean>(false);
+  const [isCreated, setIsCreated] = useState<boolean>(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const handleCreate = async () => {
     setIsCreated(false);

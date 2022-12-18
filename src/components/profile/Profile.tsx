@@ -16,13 +16,13 @@ export const Profile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [cardsList, setCardsList] = useState([]);
-  const [articlesQuantity, setArticlesQuantity] = useState(0);
-  const [current, setCurrent] = useState(1);
-  const [offset, setOffset] = useState(0);
-  const [tabsValue, setTabsValue] = useState('myArticle');
-  const [avatar, setAvatar] = useState('');
-  const [isFollowed, setIsFollowed] = useState();
+  const [cardsList, setCardsList] = useState<TArcticle[]>([]);
+  const [articlesQuantity, setArticlesQuantity] = useState<number>(0);
+  const [current, setCurrent] = useState<number>(1);
+  const [offset, setOffset] = useState<number>(0);
+  const [tabsValue, setTabsValue] = useState<string>('myArticle');
+  const [avatar, setAvatar] = useState<string>('');
+  const [isFollowed, setIsFollowed] = useState<boolean>();
   const [isSend, setIsSend] = useState<string>();
 
   const { token, username } = useAppSelector((state) => state.userSlice);
