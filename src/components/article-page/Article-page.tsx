@@ -1,3 +1,8 @@
+import React, { useEffect, useState } from 'react';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
+
+import TextArea from 'antd/es/input/TextArea';
+
 import {
   deleteArticle,
   favoriteArticle,
@@ -6,25 +11,19 @@ import {
   postComment,
   unfavoriteArticle,
 } from 'API/articlesApi';
-import ColorBox from 'components/color-box/Color-box';
-import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
-
+import { followUser, getProfile, unfollowUser } from 'API/userApi';
 import { Button, Divider, Form, Tag, Typography } from 'antd';
+import { ColorBox, Comment, Like } from 'components/';
+import { modifyDate } from 'features/helpers/modify-date';
+import { useAppDispatch, useAppSelector } from 'features/redux';
+import { setAticleInfo } from 'features/slices/article-slice';
 import { TArcticle, TComment } from 'types/types';
+
+import styles from './article-page.module.css';
 
 const { Title, Text } = Typography;
 
-import styles from './article-page.module.css';
-import { modifyDate } from 'features/helpers/modify-date';
-import Comment from 'components/comment/Comment';
-import TextArea from 'antd/es/input/TextArea';
-import { useAppDispatch, useAppSelector } from 'features/redux';
-import { followUser, getProfile, unfollowUser } from 'API/userApi';
-import Like from 'components/icons/Like';
-import { setAticleInfo } from 'features/slices/article-slice';
-
-const ArticlePage = () => {
+export const ArticlePage = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -228,5 +227,3 @@ const ArticlePage = () => {
     </>
   );
 };
-
-export default ArticlePage;

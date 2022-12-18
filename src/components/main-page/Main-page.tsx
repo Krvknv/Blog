@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-import ColorBox from 'components/color-box/Color-box';
-
-import { Tabs, Typography } from 'antd';
-const { Text, Title } = Typography;
+import { getGlobalArticles, getLocalArticle } from 'API/articlesApi';
+import { Tabs, Typography, Pagination, PaginationProps } from 'antd';
+import { ColorBox, Card, TagsList } from 'components/';
+import { useAppDispatch, useAppSelector } from 'features/redux';
+import { TArcticle, TArcticleArgs } from 'types/types';
 
 import styles from './main-page.module.css';
 
-import { getGlobalArticles, getLocalArticle } from 'API/articlesApi';
-import { TArcticle, TArcticleArgs } from 'types/types';
-import Card from 'components/card/Card';
-import TagsList from 'components/tags-list/Tags-list';
-import { useAppDispatch, useAppSelector } from 'features/redux';
-import { Pagination, PaginationProps } from 'antd';
+const { Text, Title } = Typography;
 
-const MainPage = () => {
+export const MainPage = () => {
   const [cardsList, setCardsList] = useState([]);
   const [articlesQuantity, setArticlesQuantity] = useState(0);
   const [current, setCurrent] = useState(1);
@@ -170,5 +166,3 @@ const MainPage = () => {
     </>
   );
 };
-
-export default MainPage;

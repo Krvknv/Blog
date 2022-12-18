@@ -1,19 +1,18 @@
-import { useAppSelector } from 'features/redux';
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
+import { getGlobalArticles } from 'API/articlesApi';
+import { followUser, getProfile, unfollowUser } from 'API/userApi';
 import { Button, Pagination, PaginationProps, Tabs, Typography } from 'antd';
+import { ColorBox, Card } from 'components/';
+import { useAppSelector } from 'features/redux';
+import { TArcticle, TArcticleArgs } from 'types/types';
+
+import styles from './profile.module.css';
 
 const { Title } = Typography;
 
-import styles from './profile.module.css';
-import ColorBox from 'components/color-box/Color-box';
-import { TArcticle, TArcticleArgs } from 'types/types';
-import { getGlobalArticles } from 'API/articlesApi';
-import Card from 'components/card/Card';
-import { followUser, getProfile, unfollowUser } from 'API/userApi';
-
-const Profile = () => {
+export const Profile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -149,5 +148,3 @@ const Profile = () => {
     </>
   );
 };
-
-export default Profile;

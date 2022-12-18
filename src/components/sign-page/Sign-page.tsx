@@ -1,16 +1,15 @@
 import React from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
-import { Typography } from 'antd';
-import { Button, Form, Input } from 'antd';
+import { enterUser, registerUser } from 'API/userApi';
+import { Typography, Button, Form, Input } from 'antd';
+import { useAppDispatch, useAppSelector } from 'features/redux';
 
 import styles from './sign-page.module.css';
-import { useAppDispatch, useAppSelector } from 'features/redux';
-import { enterUser, registerUser } from 'API/userApi';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
-const SignPage = () => {
+export const SignPage = () => {
   const dispatch = useAppDispatch();
 
   const { isExist, incorrectValue } = useAppSelector((state) => state.userSlice);
@@ -122,5 +121,3 @@ const SignPage = () => {
     </>
   );
 };
-
-export default SignPage;

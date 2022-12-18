@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { Typography } from 'antd';
-import { Button, Form, Input } from 'antd';
+import { createArticle, editArticle } from 'API/articlesApi';
+import { Typography, Button, Form, Input } from 'antd';
+import { useAppDispatch, useAppSelector } from 'features/redux';
+import { setAticleInfo } from 'features/slices/article-slice';
+
+import styles from './create-article-page.module.css';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
-import styles from './create-article-page.module.css';
-import { createArticle, editArticle } from 'API/articlesApi';
-import { useAppDispatch, useAppSelector } from 'features/redux';
-import { useNavigate } from 'react-router-dom';
-import { setAticleInfo } from 'features/slices/article-slice';
-
-const CreateArticlePage = () => {
+export const CreateArticlePage = () => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
@@ -178,5 +177,3 @@ const CreateArticlePage = () => {
     </>
   );
 };
-
-export default CreateArticlePage;

@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { Typography } from 'antd';
-import { Button, Form, Input } from 'antd';
+import { editUser } from 'API/userApi';
+import { Typography, Button, Form, Input } from 'antd';
+import { useAppDispatch, useAppSelector } from 'features/redux';
+
+import styles from './settings.module.css';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
-import styles from './settings.module.css';
-import { useAppDispatch, useAppSelector } from 'features/redux';
-import { useNavigate } from 'react-router-dom';
-import { editUser } from 'API/userApi';
-
-const Settings = () => {
+export const Settings = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -99,5 +98,3 @@ const Settings = () => {
     </>
   );
 };
-
-export default Settings;

@@ -1,8 +1,9 @@
-import { Card, Tag } from 'antd';
-import { getTags } from 'API/articlesApi';
 import React, { useEffect, useState } from 'react';
 
-const TagsList = (props: { setShowTabs: (value: string) => void }) => {
+import { getTags } from 'API/articlesApi';
+import { Card, Tag } from 'antd';
+
+export const TagsList = (props: { setShowTabs: (value: string) => void }) => {
   const { setShowTabs } = props;
 
   const [tagsList, setTagsList] = useState([]);
@@ -34,4 +35,3 @@ const TagsList = (props: { setShowTabs: (value: string) => void }) => {
     </Card>
   );
 };
-export default TagsList;

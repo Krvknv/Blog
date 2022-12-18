@@ -1,11 +1,11 @@
 import React from 'react';
-
-import { Button, Space } from 'antd';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import styles from './Header.module.css';
+import { Button, Space } from 'antd';
 import { useAppDispatch, useAppSelector } from 'features/redux';
 import { setUserData } from 'features/slices/user-slice';
+
+import styles from './Header.module.css';
 
 const chooseLinkStyle = ({ isActive }: { isActive: boolean }) => {
   return isActive
@@ -13,7 +13,7 @@ const chooseLinkStyle = ({ isActive }: { isActive: boolean }) => {
     : { color: '#000', fontSize: '16px' };
 };
 
-const Header = () => {
+export const Header = () => {
   const dispatch = useAppDispatch();
   const { token, image, username } = useAppSelector((state) => state.userSlice);
 
@@ -81,5 +81,3 @@ const Header = () => {
     </>
   );
 };
-
-export default Header;

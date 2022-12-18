@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+
 import articleSlice from './slices/article-slice';
 import userSlice from './slices/user-slice';
 

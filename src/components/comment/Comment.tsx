@@ -1,19 +1,18 @@
-import { Button } from 'antd';
-import { useAppSelector } from 'features/redux';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+
+import { deleteComment } from 'API/articlesApi';
+import { Button, Typography } from 'antd';
+import { Delete } from 'components/';
+import { modifyDate } from 'features/helpers/modify-date';
+import { useAppSelector } from 'features/redux';
 import { TArcticle, TComment } from 'types/types';
 
-import { Typography } from 'antd';
+import styles from './comment.module.css';
 
 const { Text } = Typography;
 
-import styles from './comment.module.css';
-import { NavLink } from 'react-router-dom';
-import { modifyDate } from 'features/helpers/modify-date';
-import Delete from 'components/icons/Detele';
-import { deleteComment } from 'API/articlesApi';
-
-const Comment = (props: {
+export const Comment = (props: {
   comment: TComment;
   articleDta: TArcticle;
   setSend: (value: string) => void;
@@ -49,5 +48,3 @@ const Comment = (props: {
     </div>
   );
 };
-
-export default Comment;
