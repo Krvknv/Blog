@@ -56,6 +56,10 @@ export const Profile = () => {
     setIsFollowed(following);
   };
 
+  const cardsList = cards.map((item: TArcticle) => (
+    <Card articleData={item} key={item.slug} setIsSend={setIsSend} />
+  ));
+
   useEffect(() => {
     const request = async () => {
       const params: TArcticleArgs = {
@@ -93,10 +97,6 @@ export const Profile = () => {
 
     request();
   }, [id, navigate, offset, tabsValue, token, username, isSend]);
-
-  const cardsList = cards.map((item: TArcticle) => (
-    <Card articleData={item} key={item.slug} setIsSend={setIsSend} />
-  ));
 
   return (
     <>

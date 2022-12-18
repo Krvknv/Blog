@@ -35,37 +35,6 @@ export const MainPage = () => {
     setOffset(0);
   };
 
-  useEffect(() => {
-    const request = async () => {
-      const params: TArcticleArgs = {
-        tag: '',
-        author: '',
-        favorited: '',
-        limit: 10,
-        offset: offset,
-      };
-
-      let articles;
-      let articlesCount;
-
-      if (tabsValue === 'local') {
-        ({ articles, articlesCount } = await getLocalArticle(token, offset));
-      } else if (tabsValue === 'tag') {
-        ({ articles, articlesCount } = await getGlobalArticles(
-          { ...params, tag: showTabs },
-          token
-        ));
-      } else {
-        ({ articles, articlesCount } = await getGlobalArticles(params, token));
-      }
-
-      setCards(articles);
-      setArticlesQuantity(articlesCount);
-    };
-
-    request();
-  }, [dispatch, offset, showTabs, tabsValue, token]);
-
   const tabsItemAuth = showTabs
     ? [
         {
@@ -127,6 +96,37 @@ export const MainPage = () => {
           children: cards.map((item: TArcticle) => <Card articleData={item} key={item.slug} />),
         },
       ];
+
+  useEffect(() => {
+    const request = async () => {
+      const params: TArcticleArgs = {
+        tag: '',
+        author: '',
+        favorited: '',
+        limit: 10,
+        offset: offset,
+      };
+
+      let articles;
+      let articlesCount;
+
+      if (tabsValue === 'local') {
+        ({ articles, articlesCount } = await getLocalArticle(token, offset));
+      } else if (tabsValue === 'tag') {
+        ({ articles, articlesCount } = await getGlobalArticles(
+          { ...params, tag: showTabs },
+          token
+        ));
+      } else {
+        ({ articles, articlesCount } = await getGlobalArticles(params, token));
+      }
+
+      setCards(articles);
+      setArticlesQuantity(articlesCount);
+    };
+
+    request();
+  }, [dispatch, offset, showTabs, tabsValue, token]);
 
   return (
     <>

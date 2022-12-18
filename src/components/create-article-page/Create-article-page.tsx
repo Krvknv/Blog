@@ -90,7 +90,11 @@ export const CreateArticlePage = () => {
   };
 
   useEffect(() => {
-    if (!token) navigate('/');
+    if (!token) {
+      navigate('/');
+
+      return;
+    }
 
     const isEditValue = name ? true : false;
     setIsEdit(isEditValue);
